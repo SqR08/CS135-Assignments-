@@ -1,0 +1,27 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname cond) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #t)))
+;;
+;; ***************************************************
+;; Steven Huang (20724105)
+;; CS 135 Fall 2017
+;; Assignment 2 Problem 1
+;; ***************************************************
+;;
+
+;; 1(a) 
+
+(define (p1? x)
+  (= x 5))
+
+(define (p2? x)
+  (= x 3))
+         
+(define (qla x)
+  (cond
+  [ (and (p2? x) (p1? x)) 'left]
+  [ (p2? x) 'down]
+  [ (p1? x) 'up]
+  [ else 'right]))
+
+;; 1(b)

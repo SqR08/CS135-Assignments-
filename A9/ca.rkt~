@@ -1,0 +1,17 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname ca) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #t)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Steven Huang (20724105)
+;; CS135 Fall 2017
+;; Assignment 09, Problem 1
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;1a)
+;;(apply-rule a b c r) applies the rule r to the row of
+;;cells a b c, and produces the resulting cell
+;;apply-rule: Nat Nat Nat Nat -> Nat
+;;requires: a, b, c anyof 0 or 1
+;;          0 <= r <= 255
+
+(define (apply-rule a b c r) 

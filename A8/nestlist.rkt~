@@ -1,0 +1,44 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname nestlist) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #t)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Steven Huang (20724105)
+;; CS135 Fall 2017
+;; Assignment 08, Problem 3
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;3a)
+;;(nfoldr combine1 combine2 base list) consumes a
+;;list and produces a new function by combining the first
+;;of the list and the recursive rest of the list
+;; nfoldr: (X Y -> Y) (Y Y -> Y) Y Nested-Listof-X -> Y
+
+(define (nfoldr combine1 combine2 base list)
+  (cond [(empty? list) base]
+        [(list? (first list))
+         (combine1 (first list) (nfoldr combine1 combine2 base (rest list)))]
+        [else
+         (combine2 (first list) (nfoldr combine1 combine2 base (rest list)))]
+        ))
+
+(define (count-items nln) (nfoldr (lambda (x y) (add1 y)) + 0 nln))
+(count-items '(1 (2 3) () ((4))))
+
+;;3b)
+;;(nfilter pred? mynlist) consumes a predicate and a nested list
+;;and produces a new list that only contains the items that
+;;are true based on the predicate
+;; nfilter: (X -> Bool) Nested-Listof-X -> Nested-Listof-X
+
+(define (nfilter pred? list)
+  (cond [(empty? list) empty]
+        [(list? (first list))
+         (append (nfilter pred? (first list))
+                 (nfilter pred? (rest list)))]
+        [(pred? (first list))
+         (cons (first list) (nfilter pred? (rest list)))]
+        [else (nfilter pred? (rest list))]
+        ))
+
+
+(nfilter odd? '(1 (2 3) () ((4))))
